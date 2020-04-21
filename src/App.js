@@ -18,7 +18,7 @@ function App() {
 
       title: "Projeto ReactJS",
       url: "https://github.com/joaobrrj/projetoReactJS",
-      techs: ["ECMASCRIPT","ReactJS"]
+      techs: ["ECMASCRIPT", "ReactJS"]
 
     });
 
@@ -27,18 +27,18 @@ function App() {
   }
 
   async function handleRemoveRepository(id) {
-    // TODO
-    console.log(`Remover o seguinte repositorio : ${id}`);
     const response = await api.delete(`/repositories/${id}`);
-    
-    if(response.status !== 204)
-    {
+
+    if (response.status !== 204) {
       alert('Não foi possível deletar repositório');
       return;
     }
 
-    const repositoryIndex = repositories.findIndex(r => r.id !== id);
-    setRepositories([...repositories.slice(repositoryIndex,1)]);
+    const newRepositories = repositories.filter(
+      repository => repository.id !== id
+    );
+
+    setRepositories(newRepositories);
 
   }
 
